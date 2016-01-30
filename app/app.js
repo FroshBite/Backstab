@@ -13,15 +13,8 @@ function create() {
     player=new Player(game, 'player');
 
     cursors = game.input.keyboard.createCursorKeys();
-    var c_key=game.input.keyboard.addKey(67); //the c key
-}
-
-function knifeAttack(){
-
-}
-
-function bowAttach(){
-
+    var c_key=game.input.keyboard.addKey(Phaser.Keyboard.C); //the c key
+    c_key.onUp.add(player.attackKnife,player,1);
 }
 
 function update() {

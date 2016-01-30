@@ -18,6 +18,44 @@ var Player=function(game,sprite_name){
   this.player.body.velocity.x = 0;
   this.player.body.velocity.y = 0;
 
+  //player states
+  this.attack_animation_playing=false; //so that we dont play the attack/knife animations at the same time
+  this.current_orientation='down';
+
+  this.attackKnife=function(){
+    console.log('attacked');
+    console.log(this.current_orientation);
+    //this.attack_animation_playing=true;
+    if(this.current_orientation==='down'){
+      this.player.animations.stop();
+      this.player.animations.play('knifeDownAttack',6,true);
+      // this.player.animation.onAnimationComplete(function(){
+      //   console.log('animation complete');
+      // });
+    }
+    else if(this.current_orientation==='up'){
+      this.player.animations.stop();
+      this.player.animations.play('knifeUpAttack',6,true);
+      // this.player.animation.onAnimationComplete(function(){
+      //   console.log('animation complete');
+      // });
+    }
+    else if (this.current_orientation==='right'){
+      this.player.animations.stop();
+      this.player.animations.play('knifeRightAttack',6,true);
+      // this.player.animation.onAnimationComplete(function(){
+      //   console.log('animation complete');
+      // });
+    }
+    else if (this.current_orientation==='left'){
+      this.player.animations.stop();
+      this.player.animations.play('knifeLeftAttack',6,true);
+      // this.player.animation.onAnimationComplete(function(){
+      //   console.log('animation complete');
+      // });
+    }
+
+  };
   
   this.movePlayer=function(cursor){
     this.player.body.velocity.x = 0;
@@ -27,33 +65,42 @@ var Player=function(game,sprite_name){
     {
         //  Move to the left
         this.player.body.velocity.x = -150;
-
-        this.player.animations.play('left');
-        position='left';
+        if(!this.attack_animation_playing){
+          this.player.animations.play('left');
+        }
+        
+        this.current_orientation='left';
     }
     else if (cursors.right.isDown)
     {
         //  Move to the right
         this.player.body.velocity.x = 150;
 
-        this.player.animations.play('right');
-        position='right';
+        if(!this.attack_animation_playing){
+          this.player.animations.play('right');
+        }
+        
+        this.current_orientation='right';
     }
     else if (cursors.up.isDown)
     {
         //  Move to the right
         this.player.body.velocity.y = -150;
 
-        this.player.animations.play('up');
-        position='up';
+        if(!this.attack_animation_playing){
+          this.player.animations.play('up');
+        }
+        this.current_orientation='up';
     }
     else if (cursors.down.isDown)
     {
         //  Move to the right
         this.player.body.velocity.y = 150;
 
-       this.player.animations.play('down');
-       position='down';
+        if(!this.attack_animation_playing){
+          this.player.animations.play('down');
+        }
+      this.current_orientation='down';
     }
 
     else
