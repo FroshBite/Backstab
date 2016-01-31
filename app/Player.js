@@ -1,5 +1,5 @@
-var Player=function(game,sprite_name){
-  var player=game.add.sprite(game.world.centerX, game.world.centerY, sprite_name); //the reference to the game player object
+var Player=function(game,sprite_name, posX, posY){
+  var player=game.add.sprite(posX, posY, sprite_name); //the reference to the game player object
   
   //enable physics for the player
   game.physics.arcade.enable(player);

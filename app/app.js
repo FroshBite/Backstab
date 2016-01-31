@@ -9,6 +9,7 @@ function preload() {
   game.load.tilemap('test', 'assets/maps/test.json', null, Phaser.Tilemap.TILED_JSON);
   game.load.image('tiles1', 'assets/maps/protected_assets/sprites/map/dungeon.png');
   game.load.image('tiles2', 'assets/maps/protected_assets/sprites/blocks/dungeon_blocks2.png');
+  game.load.image('tiles3', 'assets/maps/protected_assets/sprites/blocks/dungeon_blocks1.png');
 }
 
 function create() {
@@ -19,28 +20,32 @@ function create() {
 
     //map stuff
     game.map = game.add.tilemap('test');
-    console.log("attempting first sheet");
     game.map.addTilesetImage('tiles', 'tiles1');
-    console.log("attempting second sheet");
     game.map.addTilesetImage('dungeon', 'tiles2');
+    game.map.addTilesetImage('dungeon2', 'tiles3');
     game.backgroundlayer = game.map.createLayer('backgroundLayer');
+    game.rituallayer = game.map.createLayer('ritualLayer');
     game.blockedlayer = game.map.createLayer('blockedLayer');
     game.map.setCollisionBetween(1, 2000, true, 'blockedLayer');
+    game.decorationlayer = game.map.createLayer('decorationLayer');
     game.backgroundlayer.resizeWorld();
 
     // player stuff
-    player=new Player(game, 'player');
-	game.physics.startSystem(Phaser.Physics.ARCADE);
-	player1=new Player(game, 'player');
-	player2=new Player(game,'player');
+    var result = findObjectsByType('playerStart', game.map, 'objectLayer');
+    var spawnNum = Math.round(Math.random()*3);
+    console.log("Spawn Num: " + spawnNum);
 
+	game.physics.startSystem(Phaser.Physics.ARCADE);
+	player2=new Player(game,'player', result[spawnNum].x, result[spawnNum].y);
+	player1=new Player(game, 'player', result[spawnNum].x, result[spawnNum].y);
+	
 	// phaser-illuminated interface library
 	game.plugins.add(Phaser.Plugin.PhaserIlluminated);
 
 	cursors = game.input.keyboard.createCursorKeys();
 	var c_key=game.input.keyboard.addKey(Phaser.Keyboard.C); //the c key
 	c_key.onDown.add(player1.attackKnife,player1,1);
-	
+
 	w_key=game.input.keyboard.addKey(Phaser.Keyboard.W);
 	a_key=game.input.keyboard.addKey(Phaser.Keyboard.A);
 	s_key=game.input.keyboard.addKey(Phaser.Keyboard.S);
@@ -50,4 +55,15 @@ function create() {
 function update() {
   player1.movePlayer(cursors.left,cursors.up,cursors.down,cursors.right);
   player2.movePlayer(a_key,w_key,s_key,d_key);
+}
+
+function findObjectsByType(type, map, layer) {
+	var result = new Array();
+	map.objects[layer].forEach(function(element){
+		if(element.type === type) {
+			element.y -= map.tileHeight;
+			result.push(element);
+		}      
+	});
+	return result;
 }
