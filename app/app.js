@@ -65,26 +65,26 @@ function create() {
 	});
 	spawnLamp1 = game.add.illuminated.lamp(result[0].x, result[0].y, {
 		distance: 80,
-		color: 'rgba(255, 255, 255, 0.8)',
+		color: 'rgba(255, 255, 255, 0.3)',
 		samples: 0
 	});
 	spawnLamp2 = game.add.illuminated.lamp(result[1].x, result[1].y, {
 		distance: 80,
-		color: 'rgba(255, 255, 255, 0.8)',
+		color: 'rgba(255, 255, 255, 0.3)',
 		samples: 0
 	});
 	spawnLamp3 = game.add.illuminated.lamp(result[2].x, result[2].y, {
 		distance: 80,
-		color: 'rgba(255, 255, 255, 0.8)',
+		color: 'rgba(255, 255, 255, 0.3)',
 		samples: 0
 	});
 	spawnLamp4 = game.add.illuminated.lamp(result[3].x, result[3].y, {
 		distance: 80,
-		color: 'rgba(255, 255, 255, 0.8)',
+		color: 'rgba(255, 255, 255, 0.3)',
 		samples: 0
 	});
 	
-	dMask = game.add.illuminated.darkMask('rgba(0,0,0,0.92');
+	dMask = game.add.illuminated.darkMask('rgba(0,0,0,0.97');
 }
 
 function update() {
