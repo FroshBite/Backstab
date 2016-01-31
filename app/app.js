@@ -13,7 +13,7 @@ function create() {
 
   cursors = game.input.keyboard.createCursorKeys();
   var c_key=game.input.keyboard.addKey(Phaser.Keyboard.C); //the c key
-  c_key.onUp.add(player.attackKnife,player,1);
+  c_key.onDown.add(player.attackKnife,player,1);
 }
 
 function update() {
