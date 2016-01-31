@@ -1,8 +1,9 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update,render:render });
 var player1;
 var player2;
 var cursors;
 var w_key,a_key, s_key, d_key;
+var blocked_layer;
 
 function preload() {
   game.load.spritesheet('player', 'assets/sprites/characters/male_warrior.png',60, 60,-1,3,4);
@@ -14,9 +15,9 @@ function preload() {
 
 function create() {
   //  We're going to be using physics, so enable the Arcade Physics system
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-    // phaser-illuminated interface library
-    game.plugins.add(Phaser.Plugin.PhaserIlluminated);
+  game.physics.startSystem(Phaser.Physics.ARCADE);
+  // phaser-illuminated interface library
+  game.plugins.add(Phaser.Plugin.PhaserIlluminated);
 
     //map stuff
     game.map = game.add.tilemap('test');
@@ -38,9 +39,6 @@ function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	player2=new Player(game,'player', result[spawnNum].x, result[spawnNum].y);
 	player1=new Player(game, 'player', result[spawnNum].x, result[spawnNum].y);
-	
-	// phaser-illuminated interface library
-	game.plugins.add(Phaser.Plugin.PhaserIlluminated);
 
 	cursors = game.input.keyboard.createCursorKeys();
 	var c_key=game.input.keyboard.addKey(Phaser.Keyboard.C); //the c key
@@ -51,10 +49,15 @@ function create() {
 	s_key=game.input.keyboard.addKey(Phaser.Keyboard.S);
 	d_key=game.input.keyboard.addKey(Phaser.Keyboard.D);
 }
-
+function collideCallback(){
+  console.log('collsiion');
+}
 function update() {
   player1.movePlayer(cursors.left,cursors.up,cursors.down,cursors.right);
   player2.movePlayer(a_key,w_key,s_key,d_key);
+   game.physics.arcade.collide(player2.player, player1.player,collideCallback,null,this);
+   game.physics.arcade.collide(player2.player,game.blockedlayer);
+   game.physics.arcade.collide(player1.player,game.blockedlayer);
 }
 
 function findObjectsByType(type, map, layer) {
@@ -66,4 +69,12 @@ function findObjectsByType(type, map, layer) {
 		}      
 	});
 	return result;
+}
+
+function render(){
+  // game.debug.bodyInfo(player2.player, 32, 32);
+
+  // game.debug.body(player1.player);
+  // game.debug.body(player2.player);
+  // game.debug.body(game.blockedlayer);
 }
