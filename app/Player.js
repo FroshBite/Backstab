@@ -1,9 +1,12 @@
 var Player=function(game,sprite_name){
-  var player=game.add.sprite(32, game.world.height - 150, sprite_name); //the reference to the game player object
+  var player=game.add.sprite(game.world.centerX, game.world.centerY, sprite_name); //the reference to the game player object
   
   //enable physics for the player
   game.physics.arcade.enable(player);
   player.body.collideWorldBounds = true;
+
+  //camera follows the player
+  game.camera.follow(player);
 
   this.timeouts={
     knife:{
@@ -63,26 +66,26 @@ var Player=function(game,sprite_name){
   };
   
   //note: player will not move if he is performing an attack
-  this.movePlayer=function(cursor){
+  this.movePlayer=function(leftKey,upKey,downKey,rightKey){
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
 
-    if (cursors.left.isDown && !this.attack_animation_playing){
+    if (leftKey.isDown && !this.attack_animation_playing){
       player.body.velocity.x = -150;
       player.animations.play('left');
       this.current_orientation='left'
     }
-    else if (cursors.right.isDown && !this.attack_animation_playing){
+    else if (rightKey.isDown && !this.attack_animation_playing){
       player.body.velocity.x = 150;
       player.animations.play('right');
       this.current_orientation='right';
     }
-    else if (cursors.up.isDown && !this.attack_animation_playing){
+    else if (upKey.isDown && !this.attack_animation_playing){
       player.body.velocity.y = -150;
       player.animations.play('up');
       this.current_orientation='up';
     }
-    else if (cursors.down.isDown && !this.attack_animation_playing){
+    else if (downKey.isDown && !this.attack_animation_playing){
       player.body.velocity.y = 150;
       player.animations.play('down');
       this.current_orientation='down';
