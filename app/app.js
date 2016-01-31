@@ -13,26 +13,25 @@ function preload() {
 
 function create() {
   //  We're going to be using physics, so enable the Arcade Physics system
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-    // phaser-illuminated interface library
-    game.plugins.add(Phaser.Plugin.PhaserIlluminated);
+  game.physics.startSystem(Phaser.Physics.ARCADE);
+  // phaser-illuminated interface library
+  game.plugins.add(Phaser.Plugin.PhaserIlluminated);
 
-    //map stuff
-    game.map = game.add.tilemap('test');
-    console.log("attempting first sheet");
-    game.map.addTilesetImage('tiles', 'tiles1');
-    console.log("attempting second sheet");
-    game.map.addTilesetImage('dungeon', 'tiles2');
-    game.backgroundlayer = game.map.createLayer('backgroundLayer');
-    game.blockedlayer = game.map.createLayer('blockedLayer');
-    game.map.setCollisionBetween(1, 2000, true, 'blockedLayer');
-    game.backgroundlayer.resizeWorld();
+  //map stuff
+  game.map = game.add.tilemap('test');
+  console.log("attempting first sheet");
+  game.map.addTilesetImage('tiles', 'tiles1');
+  console.log("attempting second sheet");
+  game.map.addTilesetImage('dungeon', 'tiles2');
+  game.backgroundlayer = game.map.createLayer('backgroundLayer');
+  game.blockedlayer = game.map.createLayer('blockedLayer');
+  game.map.setCollisionBetween(1, 2000, true, 'blockedLayer');
+  game.backgroundlayer.resizeWorld();
 
-    // player stuff
-    player=new Player(game, 'player');
-	game.physics.startSystem(Phaser.Physics.ARCADE);
-	player1=new Player(game, 'player');
-	player2=new Player(game,'player');
+  game.physics.startSystem(Phaser.Physics.ARCADE);
+  player1=new Player(game, 'player');
+  player2=new Player(game,'player');
+
 
 	// phaser-illuminated interface library
 	game.plugins.add(Phaser.Plugin.PhaserIlluminated);
@@ -46,8 +45,12 @@ function create() {
 	s_key=game.input.keyboard.addKey(Phaser.Keyboard.S);
 	d_key=game.input.keyboard.addKey(Phaser.Keyboard.D);
 }
-
+function collideCallback(){
+  console.log('collsiion');
+}
 function update() {
   player1.movePlayer(cursors.left,cursors.up,cursors.down,cursors.right);
   player2.movePlayer(a_key,w_key,s_key,d_key);
+  
+  game.physics.arcade.collide(player2.player, player1.player,collideCallback,null,this);
 }
