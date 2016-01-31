@@ -39,9 +39,8 @@
          "name":"objectLayer",
          "objects":[
                 {
-                 "gid":3337,
                  "height":16,
-                 "id":15,
+                 "id":19,
                  "name":"nw",
                  "properties":
                     {
@@ -51,13 +50,12 @@
                  "type":"playerStart",
                  "visible":false,
                  "width":16,
-                 "x":128,
-                 "y":166.666666666667
+                 "x":112,
+                 "y":144
                 }, 
                 {
-                 "gid":3337,
                  "height":16,
-                 "id":16,
+                 "id":22,
                  "name":"ne",
                  "properties":
                     {
@@ -67,29 +65,12 @@
                  "type":"playerStart",
                  "visible":false,
                  "width":16,
-                 "x":1605.33333333333,
-                 "y":153.333333333333
+                 "x":1600,
+                 "y":144
                 }, 
                 {
-                 "gid":3337,
-                 "height":16,
-                 "id":17,
-                 "name":"se",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"playerStart",
-                 "visible":false,
-                 "width":16,
-                 "x":1598.66666666667,
-                 "y":1180
-                }, 
-                {
-                 "gid":3337,
-                 "height":16,
-                 "id":18,
+                 "height":0,
+                 "id":23,
                  "name":"sw",
                  "properties":
                     {
@@ -98,9 +79,24 @@
                  "rotation":0,
                  "type":"playerStart",
                  "visible":false,
-                 "width":16,
-                 "x":120,
-                 "y":1180
+                 "width":0,
+                 "x":144,
+                 "y":1168
+                }, 
+                {
+                 "height":0,
+                 "id":24,
+                 "name":"se",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"playerStart",
+                 "visible":false,
+                 "width":0,
+                 "x":1584,
+                 "y":1168
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -109,7 +105,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":19,
+ "nextobjectid":25,
  "orientation":"orthogonal",
  "properties":
     {
@@ -149,57 +145,6 @@
             },
          "spacing":0,
          "tilecount":960,
-         "tileheight":16,
-         "tilewidth":16
-        }, 
-        {
-         "columns":8,
-         "firstgid":1985,
-         "image":"protected_assets\/sprites\/blocks\/torches.png",
-         "imageheight":256,
-         "imagewidth":138,
-         "margin":0,
-         "name":"torches",
-         "properties":
-            {
-
-            },
-         "spacing":0,
-         "tilecount":128,
-         "tileheight":16,
-         "tilewidth":16
-        }, 
-        {
-         "columns":32,
-         "firstgid":2113,
-         "image":"protected_assets\/sprites\/map\/caves.png",
-         "imageheight":512,
-         "imagewidth":512,
-         "margin":0,
-         "name":"caves",
-         "properties":
-            {
-
-            },
-         "spacing":0,
-         "tilecount":1024,
-         "tileheight":16,
-         "tilewidth":16
-        }, 
-        {
-         "columns":50,
-         "firstgid":3137,
-         "image":"protected_assets\/sprites\/blocks\/simples_pimples.png",
-         "imageheight":1280,
-         "imagewidth":800,
-         "margin":0,
-         "name":"opengameart_assets",
-         "properties":
-            {
-
-            },
-         "spacing":0,
-         "tilecount":4000,
          "tileheight":16,
          "tilewidth":16
         }],
