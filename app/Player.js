@@ -1,9 +1,9 @@
 var Player=function(game,sprite_name){
   var player=game.add.sprite(game.world.centerX, game.world.centerY, sprite_name); //the reference to the game player object
-  var movement_speed=200;
-
+  
   //enable physics for the player
-  game.physics.p2.enable(player);
+  game.physics.arcade.enable(player);
+  player.body.collideWorldBounds = true;
 
   //camera follows the player
   game.camera.follow(player);
@@ -37,7 +37,8 @@ var Player=function(game,sprite_name){
   knife_down_anim.onComplete.add(disableAttackAnimation,this);
   knife_right_anim.onComplete.add(disableAttackAnimation,this);
 
-  player.body.setZeroVelocity();
+  player.body.velocity.x = 0;
+  player.body.velocity.y = 0;
 
   //player states
   this.attack_animation_playing=false; //so that we dont play the attack/knife animations at the same time
@@ -66,25 +67,26 @@ var Player=function(game,sprite_name){
   
   //note: player will not move if he is performing an attack
   this.movePlayer=function(cursor){
-    player.body.setZeroVelocity();
+    player.body.velocity.x = 0;
+    player.body.velocity.y = 0;
 
     if (cursors.left.isDown && !this.attack_animation_playing){
-      player.body.moveLeft(movement_speed);
+      player.body.velocity.x = -150;
       player.animations.play('left');
       this.current_orientation='left'
     }
     else if (cursors.right.isDown && !this.attack_animation_playing){
-      player.body.moveRight(movement_speed);
+      player.body.velocity.x = 150;
       player.animations.play('right');
       this.current_orientation='right';
     }
     else if (cursors.up.isDown && !this.attack_animation_playing){
-      player.body.moveUp(movement_speed);
+      player.body.velocity.y = -150;
       player.animations.play('up');
       this.current_orientation='up';
     }
     else if (cursors.down.isDown && !this.attack_animation_playing){
-      player.body.moveDown(movement_speed);
+      player.body.velocity.y = 150;
       player.animations.play('down');
       this.current_orientation='down';
     }

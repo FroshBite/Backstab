@@ -7,9 +7,10 @@ function preload() {
 }
 
 function create() {
-  game.physics.startSystem(Phaser.Physics.P2JS);
-  
-  player=new Player(game, 'player');
+  //  We're going to be using physics, so enable the Arcade Physics system
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    
+    player=new Player(game, 'player');
 
   cursors = game.input.keyboard.createCursorKeys();
   var c_key=game.input.keyboard.addKey(Phaser.Keyboard.C); //the c key
