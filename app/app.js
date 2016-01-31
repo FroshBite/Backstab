@@ -1,6 +1,7 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update,render:render });
 var player1;
 var player2;
+var enemies;
 var cursors;
 var w_key,a_key, s_key, d_key;
 var blocked_layer;
@@ -16,6 +17,7 @@ function preload() {
 function create() {
   //  We're going to be using physics, so enable the Arcade Physics system
   game.physics.startSystem(Phaser.Physics.ARCADE);
+
   // phaser-illuminated interface library
   game.plugins.add(Phaser.Plugin.PhaserIlluminated);
 
@@ -37,7 +39,10 @@ function create() {
     console.log("Spawn Num: " + spawnNum);
 
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-	player2=new Player(game,'player', result[spawnNum].x, result[spawnNum].y);
+
+  enemies = game.add.group();
+
+	player2=new Player(game,'player', result[spawnNum].x, result[spawnNum].y,enemies);
 	player1=new Player(game, 'player', result[spawnNum].x, result[spawnNum].y);
 
 	cursors = game.input.keyboard.createCursorKeys();
@@ -55,8 +60,8 @@ function collideCallback(){
 function update() {
   player1.movePlayer(cursors.left,cursors.up,cursors.down,cursors.right);
   player2.movePlayer(a_key,w_key,s_key,d_key);
-   game.physics.arcade.collide(player2.player, player1.player,collideCallback,null,this);
-   game.physics.arcade.collide(player2.player,game.blockedlayer);
+   game.physics.arcade.collide(enemies, player1.player,collideCallback,null,this);
+   game.physics.arcade.collide(enemies,game.blockedlayer);
    game.physics.arcade.collide(player1.player,game.blockedlayer);
 }
 

@@ -1,5 +1,10 @@
-var Player=function(game,sprite_name, posX, posY){
-  this.player=game.add.sprite(posX, posY, sprite_name); //the reference to the game player object
+var Player=function(game,sprite_name, posX, posY,group){ //the group parameter is optional
+  if(!group){
+    this.player=game.add.sprite(posX, posY, sprite_name); //the reference to the game player object
+  }else{
+    this.player=group.create(posX, posY, sprite_name); //the reference to the game player object
+  }
+
 
   
   //enable physics for the player
