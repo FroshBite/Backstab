@@ -1,9 +1,12 @@
 var Player=function(game,sprite_name){
-  var player=game.add.sprite(32, game.world.height - 150, sprite_name); //the reference to the game player object
+  var player=game.add.sprite(game.world.centerX, game.world.centerY, sprite_name); //the reference to the game player object
   
   //enable physics for the player
   game.physics.arcade.enable(player);
   player.body.collideWorldBounds = true;
+
+  //camera follows the player
+  game.camera.follow(player);
 
   this.timeouts={
     knife:{
