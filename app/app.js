@@ -54,13 +54,15 @@ function create() {
 	s_key=game.input.keyboard.addKey(Phaser.Keyboard.S);
 	d_key=game.input.keyboard.addKey(Phaser.Keyboard.D);
 }
-function collideCallback(){
-  console.log('collsiion');
-}
+
 function update() {
   player1.movePlayer(cursors.left,cursors.up,cursors.down,cursors.right);
   player2.movePlayer(a_key,w_key,s_key,d_key);
-   game.physics.arcade.collide(enemies, player1.player,collideCallback,null,this);
+
+   
+   game.physics.arcade.overlap(enemies, player1.player,player1.collideCallback,null,player1);
+   game.physics.arcade.collide(enemies, player1.player,player1.collideCallback,null,player1);
+
    game.physics.arcade.collide(enemies,game.blockedlayer);
    game.physics.arcade.collide(player1.player,game.blockedlayer);
 }
