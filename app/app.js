@@ -19,10 +19,10 @@ function create() {
   var c_key=game.input.keyboard.addKey(Phaser.Keyboard.C); //the c key
   c_key.onDown.add(player1.attackKnife,player1,1);
 
-  w_key=game.input.keyboard.addKey(Phaser.Keyboard.W); //the c key
-  a_key=game.input.keyboard.addKey(Phaser.Keyboard.A); //the c key
-  s_key=game.input.keyboard.addKey(Phaser.Keyboard.S); //the c key
-  d_key=game.input.keyboard.addKey(Phaser.Keyboard.D); //the c key
+  w_key=game.input.keyboard.addKey(Phaser.Keyboard.W);
+  a_key=game.input.keyboard.addKey(Phaser.Keyboard.A);
+  s_key=game.input.keyboard.addKey(Phaser.Keyboard.S);
+  d_key=game.input.keyboard.addKey(Phaser.Keyboard.D);
 }
 
 function update() {
