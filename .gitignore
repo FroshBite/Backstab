@@ -1,5 +1,6 @@
 protected_assets/
 protected_assets.zip
+*.tmx
 # Logs
 logs
 *.log

@@ -9,12 +9,13 @@ function preload() {
 }
 
 function create() {
-  //  We're going to be using physics, so enable the Arcade Physics system
   game.physics.startSystem(Phaser.Physics.ARCADE);
-  
   player1=new Player(game, 'player');
   player2=new Player(game,'player');
 
+  // phaser-illuminated interface library
+  game.plugins.add(Phaser.Plugin.PhaserIlluminated);
+    
   cursors = game.input.keyboard.createCursorKeys();
   var c_key=game.input.keyboard.addKey(Phaser.Keyboard.C); //the c key
   c_key.onDown.add(player1.attackKnife,player1,1);
