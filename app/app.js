@@ -3,7 +3,7 @@ var player1;
 var cursors;
 
 function preload() {
-  game.load.spritesheet('player', 'protected_assets/sprites/characters/male_warrior.png',60, 60,-1,4,4);
+  game.load.spritesheet('player', 'protected_assets/sprites/characters/male_warrior.png',60, 60,-1,3,4);
 }
 
 function create() {
