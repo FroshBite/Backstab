@@ -30,6 +30,8 @@ function create() {
     game.map.setCollisionBetween(1, 2000, true, 'blockedLayer');
     game.decorationlayer = game.map.createLayer('decorationLayer');
     game.backgroundlayer.resizeWorld();
+    
+
 
     // player stuff
     var result = findObjectsByType('playerStart', game.map, 'objectLayer');
@@ -39,7 +41,7 @@ function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	player2=new Player(game,'player', result[spawnNum].x, result[spawnNum].y);
 	player1=new Player(game, 'player', result[spawnNum].x, result[spawnNum].y);
-
+	
 	cursors = game.input.keyboard.createCursorKeys();
 	var c_key=game.input.keyboard.addKey(Phaser.Keyboard.C); //the c key
 	c_key.onDown.add(player1.attackKnife,player1,1);
@@ -48,6 +50,36 @@ function create() {
 	a_key=game.input.keyboard.addKey(Phaser.Keyboard.A);
 	s_key=game.input.keyboard.addKey(Phaser.Keyboard.S);
 	d_key=game.input.keyboard.addKey(Phaser.Keyboard.D);
+
+	// lighting stuff
+	
+	zoneLamp = game.add.illuminated.lamp(game.world.centerX, game.world.centerY + 20, {
+		distance: 100,
+		color: 'rgba(255, 0, 0, 1)',
+		samples: 0
+	});
+	spawnLamp1 = game.add.illuminated.lamp(result[0].x, result[0].y, {
+		distance: 80,
+		color: 'rgba(255, 255, 255, 0.8)',
+		samples: 0
+	});
+	spawnLamp2 = game.add.illuminated.lamp(result[1].x, result[1].y, {
+		distance: 80,
+		color: 'rgba(255, 255, 255, 0.8)',
+		samples: 0
+	});
+	spawnLamp3 = game.add.illuminated.lamp(result[2].x, result[2].y, {
+		distance: 80,
+		color: 'rgba(255, 255, 255, 0.8)',
+		samples: 0
+	});
+	spawnLamp4 = game.add.illuminated.lamp(result[3].x, result[3].y, {
+		distance: 80,
+		color: 'rgba(255, 255, 255, 0.8)',
+		samples: 0
+	});
+	
+	dMask = game.add.illuminated.darkMask('rgba(0,0,0,0.92');
 }
 function collideCallback(){
   console.log('collsiion');
@@ -58,6 +90,9 @@ function update() {
    game.physics.arcade.collide(player2.player, player1.player,collideCallback,null,this);
    game.physics.arcade.collide(player2.player,game.blockedlayer);
    game.physics.arcade.collide(player1.player,game.blockedlayer);
+
+   // lighting stuff
+   dMask.refresh();
 }
 
 function findObjectsByType(type, map, layer) {

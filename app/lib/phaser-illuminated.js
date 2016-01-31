@@ -131,7 +131,7 @@ Phaser.Plugin.PhaserIlluminated.prototype._createLamp = function(x, y, config){
     return sprite;
 }
 
-Phaser.Plugin.PhaserIlluminated.prototype._createDarkMask = function(illuminatedSprites, color){
+Phaser.Plugin.PhaserIlluminated.prototype._createDarkMask = function(color, illuminatedSprites){
     //if we aren't provided with some sprites, we grab all by default
     if(!illuminatedSprites){
         illuminatedSprites = this._game.add.illuminated._illuminatedSprites;
