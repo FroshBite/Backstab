@@ -5,6 +5,13 @@ var Player=function(game,sprite_name){
   game.physics.arcade.enable(player);
   player.body.collideWorldBounds = true;
 
+  this.timeouts={
+    knife:{
+      last_time_used: Date.now(),
+      duration: 750 //duration of the timeout in milliseconds
+    }
+  };
+
   //player move animations
   player.animations.add('up', [104,105,106,107,108,109,110,111,112], 10, true);
   player.animations.add('left', [117,118,119,120,121,122,123,124,125], 10, true);
@@ -35,7 +42,8 @@ var Player=function(game,sprite_name){
   this.current_orientation='down';
 
   this.attackKnife=function(){
-    if(!this.attack_animation_playing){
+    if(!this.attack_animation_playing && Date.now()-this.timeouts.knife.last_time_used>this.timeouts.knife.duration){
+      this.timeouts.knife.last_time_used=Date.now();//reset the timeout
       this.attack_animation_playing=true;
       player.animations.stop(null, true);
 
