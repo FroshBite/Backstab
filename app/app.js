@@ -9,6 +9,8 @@ function preload() {
 function create() {
   //  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
+    // phaser-illuminated interface library
+    game.plugins.add(Phaser.Plugin.PhaserIlluminated);
     
     player=new Player(game, 'player');
 
