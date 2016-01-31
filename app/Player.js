@@ -1,10 +1,15 @@
-var Player=function(game,sprite_name, posX, posY){
-  this.player=game.add.sprite(posX, posY, sprite_name); //the reference to the game player object
+var Player=function(game,sprite_name, posX, posY,group){ //the group parameter is optional
+  if(!group){
+    this.player=game.add.sprite(posX, posY, sprite_name); //the reference to the game player object
+  }else{
+    this.player=group.create(posX, posY, sprite_name); //the reference to the game player object
+  }
 
-  
+  $.extend(true,this, this.player);
+
+
   //enable physics for the player
   game.physics.arcade.enable(this.player);
-  
   this.player.body.collideWorldBounds = true;
   this.player.body.setSize(30, 45, 14, 12);
 
@@ -103,5 +108,13 @@ var Player=function(game,sprite_name, posX, posY){
       this.current_orientation==='up' ? this.player.frame=104:false;
       this.current_orientation==='right' ? this.player.frame=143:false;
     }
+  }
+
+  this.collideCallback=function(player, group){
+    if(this.attack_animation_playing){
+      group.kill();
+    }
+   
+    
   }
 };
